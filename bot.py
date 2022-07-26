@@ -28,7 +28,7 @@ async def on_message(message):
         problem = problems.split(" ")
         random.shuffle(problem)
         for i in range(0, len(person)):
-          await message.channel.send(person[i] + "--------->" + problem[i])
+          await message.channel.send(f'{person[i]} + "--------->" + {problem[i]}')
 
 @client.command(name='주사위')
 async def roll(ctx, number: int):
