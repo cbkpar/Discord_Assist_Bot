@@ -15,7 +15,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if message.content.startswith("!ping"):
-        await message.channel.send("pong3")
+        await message.channel.send("pong4")
 
     if message.content.startswith("!시놀로지"):
         await message.channel.send("시놀로지 : <http://jusin.synology.me:5000/>")
@@ -31,7 +31,7 @@ async def on_message(message):
         output = ""
         iCount = 1
         for i in range(0, len(person)):
-          output += iCount+". " + person[i] + " : " + problem[i] + "번 (<https://www.acmicpc.net/problem/"+problem[i]+">)\n"
+          output += "" + iCount + ". " + person[i] + " : " + problem[i] + "번 (<https://www.acmicpc.net/problem/" + problem[i] + ">)\n"
           iCount += 1
         await message.channel.send(f'{output}')
         
