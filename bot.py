@@ -14,11 +14,9 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content.startswith("ping"):
+    if message.content.startswith("!ping"):
         await message.channel.send("pong")
 
-@client.event
-async def on_message(message):
     if message.content.startswith("!문제뽑기"):
         info = message.content[6:]
         infosplit = info.split("/")
@@ -27,8 +25,11 @@ async def on_message(message):
         person = people.split(" ")
         problem = problems.split(" ")
         random.shuffle(problem)
+        output = ""
         for i in range(0, len(person)):
-          await message.channel.send(f'{person[i]} + "--------->" + {problem[i]}')
+          output += person[i] + "------------>" + problem[i] + "번 (https://www.acmicpc.net/problem/"+problem[i]+")\n"
+        await message.channel.send(f'{output}')
+        
 
 @client.command(name='주사위')
 async def roll(ctx, number: int):
