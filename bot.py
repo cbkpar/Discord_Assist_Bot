@@ -29,10 +29,8 @@ async def on_message(message):
         problem = problems.split(" ")
         random.shuffle(problem)
         output = ""
-        iCount = 1
         for i in range(0, len(person)):
-          output += "" + iCount + ". " + person[i] + " : " + problem[i] + "번 (<https://www.acmicpc.net/problem/" + problem[i] + ">)\n"
-          iCount += 1
+          output += "" + (i+1) + ". " + person[i] + " : " + problem[i] + "번 (<https://www.acmicpc.net/problem/" + problem[i] + ">)\n"
         await message.channel.send(f'{output}')
         
     if message.content.startswith("!주사위"):
