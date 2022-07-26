@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import os
 
-client = commands.Bot(command_prefix = '-')
+client = commands.Bot(command_prefix = '/')
 
 @client.event
 async def on_ready():
@@ -17,5 +17,8 @@ async def on_ready():
   
   print("봇 이름:",client.user.name,"봇 아이디:",client.user.id,"봇 버전:",discord.__version__)
 
+@client.command(name='주사위')
+async def roll(ctx, number):
+    await ctx.send(f'주사위를 굴려 {random.randint(1,int(number))}이(가) 나왔습니다. (1-{number})')
 
 client.run(os.environ['token'])
