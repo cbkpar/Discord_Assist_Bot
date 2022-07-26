@@ -27,8 +27,15 @@ async def on_message(message):
         random.shuffle(problem)
         output = ""
         for i in range(0, len(person)):
-          output += person[i] + "------------>" + problem[i] + "번 (https://www.acmicpc.net/problem/"+problem[i]+")\n"
+          output += person[i] + "------------>" + problem[i] + "번 (<https://www.acmicpc.net/problem/"+problem[i]+">)\n"
         await message.channel.send(f'{output}')
-
+        
+    if message.content.startswith("!주사위"):
+        msgsplit = message.split(" ")
+        number = int(msgsplit[1])
+        if number >= 2:
+          await ctx.send(f'주사위를 굴려 {random.randint(1,number)}이(가) 나왔습니다. (1-{number})')
+        else:
+          await ctx.send(f'2 이상의 정수를 넣어주세요!\nex) /주사위 6')
 
 client.run(os.environ['token'])
