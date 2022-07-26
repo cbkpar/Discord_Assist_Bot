@@ -31,7 +31,7 @@ async def on_message(message):
         output = ""
         iCount = 1
         for i in range(0, len(person)):
-          output += iCount+". "person[i] + " : " + problem[i] + "번 (<https://www.acmicpc.net/problem/"+problem[i]+">)\n"
+          output += iCount+". " + person[i] + " : " + problem[i] + "번 (<https://www.acmicpc.net/problem/"+problem[i]+">)\n"
           iCount += 1
         await message.channel.send(f'{output}')
         
