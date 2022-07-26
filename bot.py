@@ -33,7 +33,7 @@ async def on_message(message):
     if message.content.startswith("!주사위"):
         info = message.content[5:]
         if info >= 2
-          await ctx.send(f'주사위를 굴려 {random.randint(1,number)}이(가) 나왔습니다. (1-{number})')
+          await ctx.send(f'주사위를 굴려 {random.randint(1,info)}이(가) 나왔습니다. (1-{number})')
         else
           await ctx.send(f'2 이상의 정수를 넣어주세요!\nex) /주사위 6')
 
