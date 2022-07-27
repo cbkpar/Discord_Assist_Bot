@@ -6,11 +6,6 @@ import os
 
     client = commands.Bot(command_prefix = '/')
 
-    for filename in os.listdir('./cogs'):
-        if '.py' in filename:
-            filename = filename.replace('.py', '')
-            client.load_extension(f"cogs.{filename}")
-
     @client.event
     async def on_ready():
     await client.change_presence(status=discord.Status.online)
