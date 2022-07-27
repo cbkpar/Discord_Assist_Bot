@@ -20,7 +20,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if message.content.startswith("!ping"):
-        await message.channel.send("pong7")
+        await message.channel.send("pong2")
 
     if message.content.startswith("!help"):
         output = "```명령어 리스트\n"
