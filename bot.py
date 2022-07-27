@@ -7,11 +7,6 @@ def main():
     intents = discord.Intents.all()
     client = commands.Bot(command_prefix = '!', intents = intents)
 
-    for filename in os.listdir('./cogs'):
-        if '.py' in filename:
-            filename = filename.replace('.py', '')
-            client.load_extension(f"cogs.{filename}")
-
     @client.event
     async def on_ready():
 
