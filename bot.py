@@ -6,6 +6,11 @@ import os
 
     client = commands.Bot(command_prefix = '/')
 
+    for filename in os.listdir('./cogs'):
+        if '.py' in filename:
+            filename = filename.replace('.py', '')
+            client.load_extension(f"cogs.{filename}")
+
     @client.event
     async def on_ready():
     await client.change_presence(status=discord.Status.online)
@@ -15,7 +20,7 @@ import os
     @client.event
     async def on_message(message):
         if message.content.startswith("!ping"):
-            await message.channel.send("pong7")
+            await message.channel.send("pong1")
         if message.content.startswith("!help"):
             output = "```명령어 리스트\n"
             output += "!시놀로지\n"
@@ -102,6 +107,6 @@ import os
                 await choose.add_reaction('🔟')
             
     client.run(os.environ['token'])
-    
+
 if __name__ == '__main__':
     main()
