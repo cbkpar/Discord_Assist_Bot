@@ -125,9 +125,9 @@ async def on_message(message):
             await choose.add_reaction('🔟')
         
     if message.content.startswith("!점심추천"):
-        categories = list(self.food.keys())
+        categories = list(food.keys())
         category = random.choice(categories)
-        lunch = random.choice(self.food[category]) 
+        lunch = random.choice(food[category]) 
         await message.channel.send(f"오늘 점심은 {category}, 그 중에서 {lunch} 어떠세요?")
 
         
