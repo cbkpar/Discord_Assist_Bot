@@ -41,4 +41,22 @@ async def on_message(message):
         else:
           await message.channel.send(f'2 이상의 정수를 넣어주세요!\nex) !주사위 6')
 
+    if message.content.startswith("!아이작"):
+        await message.channel.send("https://youtu.be/g5fyObLtjCg")
+
+    if message.content.startswith("!던파"):
+        await message.channel.send("https://youtu.be/kEvlmInotpU")
+
+    if message.content.startswith("!메이플"):
+        await message.channel.send("https://youtu.be/7iqHOJ-7LNY")
+
+    if message.content.startswith("!용들의왕"):
+        await message.channel.send("https://youtu.be/E-FCy8zKDD4")
+
+    if message.content.startswith("!카타나제로"):
+        await message.channel.send("https://youtu.be/GbzeaAkcL9g")
+
+    if message.content.startswith("!요시"):
+        await message.channel.send("https://youtu.be/v_hWPGw070w")
+
 client.run(os.environ['token'])
