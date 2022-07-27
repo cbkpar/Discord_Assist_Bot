@@ -9,5 +9,6 @@ class Example(commands.Cog):
         print("example Cog is Ready")
 
 
+
 def setup(client):
     client.add_cog(Example(client))

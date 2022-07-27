@@ -65,6 +65,7 @@ async def on_message(message):
         msgsplit = message.content.split(" ")
         number = int(msgsplit[1])
         if number >= 1:
+          await message.channel.send(f'{message.author.mention}님 {number}초 타이머를 시작합니다.')
           await asyncio.sleep(number)
           await message.channel.send(f'{message.author.mention}님 시간이 {number}초 흘렀습니다.')
         else:
