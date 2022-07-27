@@ -59,7 +59,7 @@ async def on_message(message):
         number = int(msgsplit[1])
         if number >= 1:
           await asyncio.sleep(number)
-          await message.channel.send(f'{number}의 시간이 흘렀습니다.')
+          await message.channel.send(f'{message.author.mention}님 시간이 {number}초 흘렀습니다.')
         else:
           await message.channel.send(f'1 이상의 정수를 넣어주세요!\nex) !타이머 10')
 
