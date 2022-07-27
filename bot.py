@@ -2,8 +2,7 @@ import discord, datetime, asyncio, random
 from discord.ext import commands
 import os
 
-    intents = discord.Intents.all()
-    client = commands.Bot(command_prefix = '!', intents = intents)
+    client = commands.Bot(command_prefix = '!')
 
     @client.event
     async def on_ready():
