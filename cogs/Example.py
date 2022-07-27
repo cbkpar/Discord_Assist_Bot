@@ -8,5 +8,9 @@ class Example(commands.Cog):
     async def on_ready(self):
         print("example Cog is Ready")
 
+    @commands.command(name = "ping3")
+    async def _ping(self, ctx):
+        await ctx.send('pong!')
+
 def setup(client):
     client.add_cog(Example(client))
