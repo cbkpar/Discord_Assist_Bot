@@ -63,7 +63,6 @@ async def on_message(message):
         else:
           await message.channel.send(f'1 이상의 정수를 넣어주세요!\nex) !타이머 10')
 
-
     if message.content.startswith("!아이작"):
         await message.channel.send("https://youtu.be/g5fyObLtjCg")
 
@@ -81,5 +80,12 @@ async def on_message(message):
 
     if message.content.startswith("!요시"):
         await message.channel.send("https://youtu.be/v_hWPGw070w")
+
+    if message.content.startswith("!투표"):
+        vote = message.content[4:].split("/")
+        await message.channel.send("투표 - " + vote[0])
+        for i in range(1, len(vote)):
+            choose = await message.channel.send("```" + vote[i] + "```")
+            await choose.add_reaction('👍')
 
 client.run(os.environ['token'])
