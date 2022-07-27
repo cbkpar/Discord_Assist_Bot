@@ -8,10 +8,5 @@ class Example(commands.Cog):
     async def on_ready(self):
         print("example Cog is Ready")
 
-    @commands.event
-    async def on_message(message):
-        if message.content.startswith("!ping2"):
-            await message.channel.send("pong2")
-
 def setup(client):
     client.add_cog(Example(client))
