@@ -1,9 +1,7 @@
 import discord, datetime, asyncio, random
-from youtube_dl import YoutubeDL
 from discord.ext import commands
 import os
 
-def main():
     intents = discord.Intents.all()
     client = commands.Bot(command_prefix = '!', intents = intents)
 
@@ -115,6 +113,3 @@ def main():
                 await choose.add_reaction('🔟')
             
     client.run(os.environ['token'])
-
-if __name__ == '__main__':
-    main()
