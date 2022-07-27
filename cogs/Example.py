@@ -11,6 +11,7 @@ class Example(commands.Cog):
     @commands.command(name="ping")
     async def restaurant(self, ctx):
       embed = discord.Embed(title=nowDate + ' pong.', description=descript, color=discord.Color.blue())
+      await message.channel.send("pong1234")
       await ctx.send(embed=embed)
 
 
