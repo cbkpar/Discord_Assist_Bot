@@ -17,7 +17,7 @@ async def on_message(message):
         await message.channel.send("pong6")
 
     if message.content.startswith("!help"):
-        output = ""
+        output = "```명령어 리스트\n"
         output += "!시놀로지\n"
         output += "!문제뽑기 이름 이름/번호 번호\n"
         output += "!주사위 숫자\n"
@@ -28,6 +28,8 @@ async def on_message(message):
         output += "!용들의왕\n"
         output += "!카타나제로\n"
         output += "!요시\n"
+        output += "!요시\n"
+        output += "```"
         await message.channel.send(output)
 
     if message.content.startswith("!시놀로지"):
@@ -83,9 +85,20 @@ async def on_message(message):
 
     if message.content.startswith("!투표"):
         vote = message.content[4:].split("/")
-        await message.channel.send("투표 - " + vote[0])
+        output = "```투표 - " + vote[0] + "\n"
         for i in range(1, len(vote)):
-            choose = await message.channel.send("```" + vote[i] + "```")
-            await choose.add_reaction('👍')
-
+            output += int(i) +". " + vote[i] +"\n"
+        output += "```"
+        choose = await message.channel.send(f'{output}')
+        if len(vote) >= 1:
+            await choose.add_reaction(':one:')
+        if len(vote) >= 2:
+            await choose.add_reaction(':two:')
+        if len(vote) >= 3:
+            await choose.add_reaction(':three:')
+        if len(vote) >= 4:
+            await choose.add_reaction(':four:')
+        if len(vote) >= 5:
+            await choose.add_reaction(':five:')
+        
 client.run(os.environ['token'])
