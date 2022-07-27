@@ -3,81 +3,13 @@ from youtube_dl import YoutubeDL
 from discord.ext import commands
 import os
 
-class Music(commands.Cog):
-    def __init__(self, client):
-        option = {
-        'format': 'bestaudio/best',
-        'noplaylist': True,
-        }
-        self.client = client
-        self.DL = YoutubeDL(option)
-
-    @commands.Cog.listener()
-    async def on_ready(self):
-        print("Music Cog is Ready")
-
-    @commands.command(name = "유투브")
-    async def url_reading(self, ctx, url):
-        data = self.DL.extract_info(url, download = False)
-        title = data['title']
-        uploader = data['uploader']
-        uploader_url = data['uploader_url']
-        view_count = data['view_count']
-        average_rating = data['average_rating']
-        like_count = data['like_count']
-        thumbnail=data['thumbnail']
-
-        embed = discord.Embed(title = title, url = url)
-        embed.set_author(name = uploader, url = uploader_url)
-        embed.add_field(name = '조회수', value = view_count, inline = True)
-        embed.add_field(name = '평점', value = average_rating, inline = True)
-        embed.add_field(name = '좋아요 수', value = like_count, inline = True)
-        embed.set_image(url = thumbnail)
-        await ctx.send(embed = embed)
-
-    @commands.command(name = "음악재생")
-    async def play_music(self, ctx, url):
-        if ctx.voice_client is None:
-            if ctx.author.voice:
-                await ctx.author.voice.channel.connect()
-            else:
-                embed = discord.Embed(title = '오류 발생', description = "음성 채널에 들어간 후 명령어를 사용해 주세요",
-                color = discord.Color.red())
-                await ctx.send(embed = embed)
-                raise commands.CommandError("Author not connected to a voice channel.")
-
-        elif ctx.voice_client.is_playing():
-            ctx.voice_client.stop()
-
-        await ctx.send(url)
-        embed = discord.Embed(title = '음악 재생', description = '음악 재생을 준비하고 있어요. 잠시만 기다려주세요!', color = discord.Color.green())
-        await ctx.send(embed = embed)
-    
-        data = self.DL.extract_info(url, download = False)
-        link = data['url']
-        title = data['title']
-        uploader = data['uploader']
-
-        ffmpeg_options = {
-            'options': '-vn',
-            "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"
-        }
-        player = discord.FFmpegPCMAudio(link, **ffmpeg_options, executable = "C:/ffmpeg/bin/ffmpeg")
-
-        ctx.voice_client.play(player)
-        embed = discord.Embed(title = f'{title}', url=url, color = discord.Color.red())
-        embed.set_author(name = f'{uploader}', url = url )
-        embed.add_field(name = '조회수', value=data['view_count'], inline=True)
-        embed.add_field(name = '평점', value=data['average_rating'], inline=True)
-        embed.add_field(name = '좋아요 수', value=data['like_count'], inline=True)
-        embed.set_image(url = data['thumbnail'])
-        await ctx.send(embed=embed)
-
-def setup(client):
-    client.add_cog(Music(client))
-
-
 client = commands.Bot(command_prefix = '/')
+
+
+    for filename in os.listdir('./cogs'):
+        if '.py' in filename:
+            filename = filename.replace('.py', '')
+            client.load_extension(f"cogs.{filename}")
 
 @client.event
 async def on_ready():
@@ -88,8 +20,8 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content.startswith("!ping"):
-        await message.channel.send("pong7")
+    if message.content.startswith("!ping1"):
+        await message.channel.send("pong1")
 
     if message.content.startswith("!help"):
         output = "```명령어 리스트\n"
