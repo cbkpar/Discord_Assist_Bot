@@ -8,9 +8,9 @@ class Example(commands.Cog):
     async def on_ready(self):
         print("example Cog is Ready")
         
-    @bot.event
+    @commands.event
     async def on_message(message):
-      await bot.process_commands(message)
+      await commands.process_commands(message)
       await message.channel.send("pong1")
 
 
