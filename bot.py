@@ -1,6 +1,5 @@
-import discord
+import discord, datetime, asyncio, random
 from discord.ext import commands
-import random
 import os
 
 client = commands.Bot(command_prefix = '/')
@@ -15,7 +14,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if message.content.startswith("!ping"):
-        await message.channel.send("pong4")
+        await message.channel.send("pong5")
 
     if message.content.startswith("!시놀로지"):
         await message.channel.send("시놀로지 : <http://jusin.synology.me:5000/>")
@@ -40,6 +39,16 @@ async def on_message(message):
           await message.channel.send(f'주사위를 굴려 {random.randint(1,number)}이(가) 나왔습니다. (1-{number})')
         else:
           await message.channel.send(f'2 이상의 정수를 넣어주세요!\nex) !주사위 6')
+
+    if message.content.startswith("!타이머"):
+        msgsplit = message.content.split(" ")
+        number = int(msgsplit[1])
+        if number >= 1:
+          await asyncio.sleep(number)
+          await message.channel.send(f'{number}의 시간이 흘렀습니다.')
+        else:
+          await message.channel.send(f'1 이상의 정수를 넣어주세요!\nex) !타이머 10')
+
 
     if message.content.startswith("!아이작"):
         await message.channel.send("https://youtu.be/g5fyObLtjCg")
