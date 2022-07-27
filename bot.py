@@ -90,15 +90,25 @@ async def on_message(message):
             output += str(i) +". " + vote[i] +"\n"
         output += "```"
         choose = await message.channel.send(f'{output}')
-        if len(vote) >= 1:
+        if len(vote) > 1:
             await choose.add_reaction('1️⃣')
-        if len(vote) >= 2:
+        if len(vote) > 2:
             await choose.add_reaction('2️⃣')
-        if len(vote) >= 3:
+        if len(vote) > 3:
             await choose.add_reaction('3️⃣')
-        if len(vote) >= 4:
+        if len(vote) > 4:
             await choose.add_reaction('4️⃣')
-        if len(vote) >= 5:
+        if len(vote) > 5:
             await choose.add_reaction('5️⃣')
+        if len(vote) > 6:
+            await choose.add_reaction('6️⃣')
+        if len(vote) > 7:
+            await choose.add_reaction('7️⃣')
+        if len(vote) > 8:
+            await choose.add_reaction('8️⃣')
+        if len(vote) > 9:
+            await choose.add_reaction('9️⃣')
+        if len(vote) > 10:
+            await choose.add_reaction('🔟')
         
 client.run(os.environ['token'])
