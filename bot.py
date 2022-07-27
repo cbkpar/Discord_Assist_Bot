@@ -5,6 +5,13 @@ import os
 
 client = commands.Bot(command_prefix = '/')
 
+food = {
+    "한식": ["떡볶이", "삼겹살", "김밥", "곱창", "불고기", "냉면", "칼국수", "된장찌개", "비빔밥", "김치찌개"],
+    "중식": ["볶음밥", "짬뽕", "짜장면", "탕수육", "칠리새우", "냉채", "마파두부", "딤섬", "깐풍기", "동파육"],
+    "양식": ["피자", "샐러드", "파스타", "스테이크", "샌드위치", "햄버거", "토스트", "바비큐", "핫도그", "리조또"],
+    "일식": ["스시", "우동", "회", "오뎅", "라멘", "소바", "샤브샤브", "타코야끼", "가라아게", "가쓰오부시"]
+}
+
 for filename in os.listdir('./cogs'):
     if '.py' in filename:
         filename = filename.replace('.py', '')
@@ -116,5 +123,12 @@ async def on_message(message):
             await choose.add_reaction('9️⃣')
         if len(vote) > 10:
             await choose.add_reaction('🔟')
+        
+    if message.content.startswith("!점심추천"):
+        categories = list(self.food.keys())
+        category = random.choice(categories)
+        lunch = random.choice(self.food[category]) 
+        await message.channel.send(f"오늘 점심은 {category}, 그 중에서 {lunch} 어떠세요?")
+
         
 client.run(os.environ['token'])
