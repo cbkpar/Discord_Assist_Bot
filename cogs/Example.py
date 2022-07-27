@@ -8,10 +8,10 @@ class Example(commands.Cog):
     async def on_ready(self):
         print("example Cog is Ready")
         
-@commands.command(name="ping3", description = "pong출력")
-    async def recommand_restaurant(self, ctx):
-      embed = discord.Embed(title='', description=f'ㄹㄹㄹㄹㄹ', color=discord.Color.red())
-      await ctx.send(embed=embed)
+    @commands.command(name="ping3", description = "pong출력")
+        async def recommand_restaurant(self, ctx):
+          embed = discord.Embed(title='', description=f'ㄹㄹㄹㄹㄹ', color=discord.Color.red())
+          await ctx.send(embed=embed)
 
 
 def setup(client):
