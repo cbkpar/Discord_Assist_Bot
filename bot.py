@@ -8,13 +8,27 @@ client = commands.Bot(command_prefix = '/')
 async def on_ready():
 
   await client.change_presence(status=discord.Status.online)
-  await client.change_presence(activity=discord.Game(name="비트아지트"))
+  await client.change_presence(activity=discord.Game(name="비트아지트 (!help)"))
   print("봇 이름:",client.user.name,"봇 아이디:",client.user.id,"봇 버전:",discord.__version__)
 
 @client.event
 async def on_message(message):
     if message.content.startswith("!ping"):
-        await message.channel.send("pong5")
+        await message.channel.send("pong6")
+
+    if message.content.startswith("!help"):
+        output = ""
+        output += "!시놀로지\n"
+        output += "!문제뽑기 이름 이름/번호 번호\n"
+        output += "!주사위 숫자\n"
+        output += "!타이머 숫자\n"
+        output += "!아이작\n"
+        output += "!던파\n"
+        output += "!메이플\n"
+        output += "!용들의왕\n"
+        output += "!카타나제로\n"
+        output += "!요시\n"
+        await message.channel.send(output)
 
     if message.content.startswith("!시놀로지"):
         await message.channel.send("시놀로지 : <http://jusin.synology.me:5000/>")
