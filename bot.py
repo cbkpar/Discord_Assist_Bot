@@ -14,7 +14,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if message.content.startswith("!ping"):
-        await message.channel.send("pong6")
+        await message.channel.send("pong7")
 
     if message.content.startswith("!help"):
         output = "```명령어 리스트\n"
@@ -28,7 +28,7 @@ async def on_message(message):
         output += "!용들의왕\n"
         output += "!카타나제로\n"
         output += "!요시\n"
-        output += "!요시\n"
+        output += "!투표 제목/항목1/항목2/항목3\n"
         output += "```"
         await message.channel.send(output)
 
@@ -87,7 +87,7 @@ async def on_message(message):
         vote = message.content[4:].split("/")
         output = "```투표 - " + vote[0] + "\n"
         for i in range(1, len(vote)):
-            output += int(i) +". " + vote[i] +"\n"
+            output += str(i) +". " + vote[i] +"\n"
         output += "```"
         choose = await message.channel.send(f'{output}')
         if len(vote) >= 1:
