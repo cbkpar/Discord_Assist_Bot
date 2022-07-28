@@ -17,11 +17,6 @@ food = {
     "일식": ["스시", "우동", "회", "오뎅", "라멘", "소바", "샤브샤브", "타코야끼", "가라아게", "가쓰오부시"]
 }
 
-for filename in os.listdir('./cogs'):
-    if '.py' in filename:
-        filename = filename.replace('.py', '')
-        client.load_extension(f"cogs.{filename}")
-
 @client.event
 async def on_ready():
   await client.change_presence(status=discord.Status.online)
