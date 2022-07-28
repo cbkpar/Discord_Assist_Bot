@@ -94,15 +94,6 @@ class Music(commands.Cog):
             embed = discord.Embed(title='', description='멈춘 부분부터 음악을 재생합니다.', color=discord.Color.purple())
             await ctx.send(embed=embed)
 
-    @commands.command(name="재생목록")
-    async def resume_music(self, ctx):
-      embed = discord.Embed(title='플레이리스트', description='재생목록입니다', color=discord.Color.purple())
-      for i in range(len(self.playqueue)):
-        playdata = self.playqueue[i]
-        link = playdata['url']
-        title = playdata['title']
-        embed.add_field(name=f'{i}.', value=f'{title}', inline=False)
-      await ctx.send(embed=embed)
 
 def setup(client):
     client.add_cog(Music(client))
