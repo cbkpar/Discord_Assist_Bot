@@ -1,4 +1,5 @@
 import discord
+import asyncio
 from discord.ext import commands
 from youtube_dl import YoutubeDL
 from .module.youtube import getUrl
@@ -11,7 +12,7 @@ class Music(commands.Cog):
         }
         self.client = client
         self.DL = YoutubeDL(option)
-        self.TestNumber = 1
+        self.playqueue = []
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -35,24 +36,42 @@ class Music(commands.Cog):
         await ctx.send(embed=embed)
 
         data = self.DL.extract_info(url, download = False)
-        link = data['url']
-        title = data['title']
-
-        ffmpeg_options = {
-            'options': '-vn',
-            "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"
-        }
         
-        def EndSong(ctx):
-          print("Music Cog is Ready")
+        self.playqueue.append(data)
 
-        player = discord.FFmpegPCMAudio(link, **ffmpeg_options)
-        ctx.voice_client.play(player, after=lambda e: EndSong(ctx))
-        embed = discord.Embed(title = '음악 재생', description = f'{title} 재생을 시작힐게요!' , color = discord.Color.blue())
-        await ctx.send(embed=embed)
-        self.TestNumber += 1
-        await ctx.send(f'{self.TestNumber} 입니다')
-        
+        def play_next(ctx):
+            vc = get(self.bot.voice_clients, guild=ctx.guild)
+            if len(self.playqueue) >= 1:
+                playdata = self.playqueue.pop(0)
+                link = playdata['url']
+                title = playdata['title']
+                ffmpeg_options = {
+                    'options': '-vn',
+                    "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"
+                }
+                player = discord.FFmpegPCMAudio(link, **ffmpeg_options)
+                ctx.voice_client.play(player, after=lambda e: play_next(ctx))
+            else:
+                asyncio.sleep(90) #wait 1 minute and 30 seconds
+                if not vc.is_playing():
+                    asyncio.run_coroutine_threadsafe(vc.disconnect(ctx), self.bot.loop)
+                    asyncio.run_coroutine_threadsafe(ctx.send("No more songs in queue."))
+                    
+        if ctx.voice_client.is_playing():
+            embed = discord.Embed(title = '', description = '다음 재생 목록에 추가했어요.' , color = discord.Color.blue())
+            await ctx.send(embed=embed)
+        else:
+          playdata = self.playqueue.pop(0)
+          link = playdata['url']
+          title = playdata['title']
+          ffmpeg_options = {
+              'options': '-vn',
+              "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"
+          }
+          player = discord.FFmpegPCMAudio(link, **ffmpeg_options)
+          ctx.voice_client.play(player, after=lambda e: play_next(ctx))
+          embed = discord.Embed(title = '음악 재생', description = f'{title} 재생을 시작힐게요!' , color = discord.Color.blue())
+          await ctx.send(embed=embed)
 
     @commands.command(name ="음악종료")
     async def quit_music(self, ctx):
