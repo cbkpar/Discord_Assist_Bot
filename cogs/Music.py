@@ -15,17 +15,6 @@ class Music(commands.Cog):
     async def on_ready(self):
         print("Music Cog is Ready")
 
-    async def play_music(self, ctx, url):
-    if ctx.voice_client is None: 
-        if ctx.author.voice:
-            await ctx.author.voice.channel.connect()
-        else:
-            embed = discord.Embed(title = '오류 발생', description = "음성 채널에 들어간 후 명령어를 사용 해 주세요!", color = discord.Color.red())
-            await ctx.send(embed=embed)
-            raise commands.CommandError("Author not connected to a voice channel.")
-    elif ctx.voice_client.is_playing():
-        ctx.voice_client.stop()
-
     @commands.command(name ="음악재생")
     async def play_music(self, ctx, *keywords):
         if ctx.voice_client is None: 
