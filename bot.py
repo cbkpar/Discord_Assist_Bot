@@ -3,7 +3,12 @@ from youtube_dl import YoutubeDL
 from discord.ext import commands
 import os
 
-client = commands.Bot(command_prefix = '/')
+client = commands.Bot(command_prefix = '!')
+
+for filename in os.listdir('./cogs'):
+    if '.py' in filename:
+        filename = filename.replace('.py', '')
+        client.load_extension(f"cogs.{filename}")
 
 food = {
     "한식": ["떡볶이", "삼겹살", "김밥", "곱창", "불고기", "냉면", "칼국수", "된장찌개", "비빔밥", "김치찌개"],
@@ -134,10 +139,5 @@ async def on_message(message):
         await message.channel.send(f"오늘 점심은 {category}, 그 중에서 {lunch} 어떠세요?")
     
     await client.process_commands(message)
-
-@client.command()
-async def ping(ctx):
-    await ctx.send('pong')        
-
 
 client.run(os.environ['token'])
