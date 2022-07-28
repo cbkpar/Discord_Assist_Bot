@@ -1,13 +1,14 @@
 import asyncio
 import discord
 from discord.ext import commands
-import csv
+import json
 import random
 
 class Quiz(commands.Cog):
     def __init__(self, client):
         self.client = client
-
+        with open("./data/lunch.json", 'r', encoding='utf-8') as f:
+            self.quizDict = json.load(f)
 
     @commands.Cog.listener()
     async def on_ready(self):
