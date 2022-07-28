@@ -45,7 +45,6 @@ class Music(commands.Cog):
         await ctx.send(embed=embed)
         player = discord.FFmpegPCMAudio(link, **ffmpeg_options)
         ctx.voice_client.play(player)
-        
 
     @commands.command(name ="음악종료")
     async def quit_music(self, ctx):
