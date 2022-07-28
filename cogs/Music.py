@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from youtube_dl import YoutubeDL
+from .module.youtube import getUrl
 
 class Music(commands.Cog):
     def __init__(self, client):
