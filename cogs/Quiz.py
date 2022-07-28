@@ -12,7 +12,8 @@ class Quiz(commands.Cog):
 		        reader = csv.reader(f)
 		        for row in reader:
 		            self.quizDict[row[0]] = row[1]
-                
+        f.close()
+
     @commands.Cog.listener()
     async def on_ready(self):
         print("Quiz Cog is Ready")
