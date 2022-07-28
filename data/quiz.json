@@ -3,12 +3,21 @@
     "벡터 정규화 함수?": "D3DXVec3Normalize",
     "벡터 내적 함수?": "D3DXVec3Dot",
     "벡터 외적 함수?": "D3DXVec3Cross",
-    "항등행렬 만드는 함수?": "D3DXMatrixIdentity",
+    "메트릭스 항등행렬 만드는 함수?": "D3DXMatrixIdentity",
+    "메트릭스 역행렬 함수": "D3DXMatrixInverse",
+    "메트릭스 전치행렬 함수": "D3DXMatrixTranspose",
     "행렬 크기 변경 함수": "D3DXMatrixScaling",
     "X축 기준 회전 함수": "D3DXMatrixRotationX",
     "Y축 기준 회전 함수": "D3DXMatrixRotationY",
     "Z축 기준 회전 함수": "D3DXMatrixRotationZ",
     "위치 이동 함수?": "D3DXMatrixTranslation",
     "위치벡터(w=1)로 변환 함수?": "D3DXVec3TransformCoord",
-    "방향벡터(w=1)로 변환 함수?": "D3DXVec3TransformNormal"
+    "방향벡터(w=0)로 변환 함수?": "D3DXVec3TransformNormal",
+    "행렬 곱셈 순서(자전, 스케일, 이동, 부모, 공전)": "스자이공부",
+    "3차원 공간내 벡터를 표현하기 위한 자료형": "D3DVECTOR3",
+    "u, v 두 벡터가 직각일 경우 u·v [양수, 음수, 0] ": "0",
+    "u, v 두 벡터가 90도 보다 작을 때 u·v 값? [양수, 음수, 0] ": "양수",
+    "u, v 두 벡터가 90도 보다 클 때 u·v 값? [양수, 음수, 0] ": "음수",
+    "두 행렬 A, B가 있을 때 AB=BA 이다 [맞다, 틀리다] ": "틀리다",
+    "두 행렬 A, B가 있을 때 (AB)^-1 =(A^-1)(B^-1) 이다 [맞다, 틀리다] ": "틀리다"
 }
