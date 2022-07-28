@@ -107,9 +107,10 @@ class Music(commands.Cog):
                 "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"
             }
             player = discord.FFmpegPCMAudio(link, **ffmpeg_options)
+            await ctx.voice_client.stop()
             ctx.voice_client.play(player, after=lambda e: play_next(ctx))
             embed = discord.Embed(title = '음악 재생', description = f'{title} 재생을 시작힐게요!' , color = discord.Color.blue())
-            asyncio.run_coroutine_threadsafe(ctx.send(embed=embed))
+            await ctx.send(embed=embed)
 
     @commands.command(name="재생목록")
     async def list_music(self, ctx):
