@@ -27,8 +27,6 @@ class Music(commands.Cog):
                 embed = discord.Embed(title = '오류 발생', description = "음성 채널에 들어간 후 명령어를 사용 해 주세요!", color = discord.Color.red())
                 await ctx.send(embed=embed)
                 raise commands.CommandError("Author not connected to a voice channel.")
-        elif ctx.voice_client.is_playing():
-            ctx.voice_client.stop()
         keyword = ' '.join(keywords)
         url = getUrl(keyword)
         await ctx.send(url)
@@ -40,7 +38,6 @@ class Music(commands.Cog):
         self.playqueue.append(data)
 
         def play_next(ctx):
-            vc = get(self.bot.voice_clients, guild=ctx.guild)
             if len(self.playqueue) >= 1:
                 playdata = self.playqueue.pop(0)
                 link = playdata['url']
@@ -56,7 +53,7 @@ class Music(commands.Cog):
                 if not vc.is_playing():
                     asyncio.run_coroutine_threadsafe(vc.disconnect(ctx), self.bot.loop)
                     asyncio.run_coroutine_threadsafe(ctx.send("No more songs in queue."))
-                    
+
         if ctx.voice_client.is_playing():
             embed = discord.Embed(title = '', description = '다음 재생 목록에 추가했어요.' , color = discord.Color.blue())
             await ctx.send(embed=embed)
