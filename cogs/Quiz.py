@@ -7,7 +7,12 @@ import random
 class Quiz(commands.Cog):
     def __init__(self, client):
         self.client = client
-    
+    		self.quizDict = {}
+		    with open("./data/quiz.csv", 'r', encoding='utf-8') as f:
+		        reader = csv.reader(f)
+		        for row in reader:
+		            self.quizDict[row[0]] = row[1]
+                
     @commands.Cog.listener()
     async def on_ready(self):
         print("Quiz Cog is Ready")
