@@ -46,13 +46,13 @@ class Music(commands.Cog):
         embed = discord.Embed(title = '음악 재생', description = f'{title} 재생을 시작힐게요!' , color = discord.Color.blue())
         await ctx.send(embed=embed)
 
-      @commands.command(name ="음악종료")
-      async def quit_music(self, ctx):
-          voice = ctx.voice_client
-          if voice.is_connected():
-              await voice.disconnect()
-              embed = discord.Embed(title = '', description = '음악 재생을 종료합니다.' , color = discord.Color.blue())
-              await ctx.send(embed=embed)
+    @commands.command(name ="음악종료")
+    async def quit_music(self, ctx):
+        voice = ctx.voice_client
+        if voice.is_connected():
+            await voice.disconnect()
+            embed = discord.Embed(title = '', description = '음악 재생을 종료합니다.' , color = discord.Color.blue())
+            await ctx.send(embed=embed)
 
 def setup(client):
     client.add_cog(Music(client))
