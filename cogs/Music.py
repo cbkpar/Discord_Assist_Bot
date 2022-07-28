@@ -27,8 +27,6 @@ class Music(commands.Cog):
                 embed = discord.Embed(title = '오류 발생', description = "음성 채널에 들어간 후 명령어를 사용 해 주세요!", color = discord.Color.red())
                 await ctx.send(embed=embed)
                 raise commands.CommandError("Author not connected to a voice channel.")
-        elif ctx.voice_client.is_playing():
-            ctx.voice_client.stop()
         keyword = ' '.join(keywords)
         url = getUrl(keyword)
         await ctx.send(url)
@@ -49,6 +47,8 @@ class Music(commands.Cog):
                 }
                 player = discord.FFmpegPCMAudio(link, **ffmpeg_options)
                 ctx.voice_client.play(player, after=lambda e: play_next(ctx))
+                embed = discord.Embed(title = '음악 재생', description = f'{title} 재생을 시작힐게요!' , color = discord.Color.blue())
+                asyncio.run_coroutine_threadsafe(ctx.send(embed=embed))
             else:
                 asyncio.sleep(90) #wait 1 minute and 30 seconds
                 if not vc.is_playing():
