@@ -46,8 +46,6 @@ class Music(commands.Cog):
                 }
                 player = discord.FFmpegPCMAudio(link, **ffmpeg_options)
                 ctx.voice_client.play(player, after=lambda e: play_next(ctx))
-                embed = discord.Embed(title = '음악 재생', description = f'{title} 재생을 시작힐게요!' , color = discord.Color.blue())
-                asyncio.run_coroutine_threadsafe(ctx.send(embed=embed))
             else:
                 asyncio.sleep(90) #wait 1 minute and 30 seconds
                 if not vc.is_playing():
@@ -98,13 +96,13 @@ class Music(commands.Cog):
 
     @commands.command(name="재생목록")
     async def resume_music(self, ctx):
+      embed = discord.Embed(title='플레이리스트', description='재생목록입니다', color=discord.Color.purple())
       for i in range(len(self.playqueue)):
         playdata = self.playqueue[i]
         link = playdata['url']
         title = playdata['title']
-        embed = discord.Embed(title='플레이리스트', description='재생목록입니다', color=discord.Color.purple())
         embed.add_field(name=f'{i}.', value=f'{title}', inline=False)
-        await ctx.send(embed=embed)
+      await ctx.send(embed=embed)
 
 def setup(client):
     client.add_cog(Music(client))
