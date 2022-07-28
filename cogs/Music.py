@@ -1,0 +1,59 @@
+import discord
+from discord.ext import commands
+from youtube_dl import YoutubeDL
+
+class Music(commands.Cog):
+    def __init__(self, client):
+        option = {
+            'format': 'bestaudio/best',
+            'noplaylist': True,
+        }
+        self.client = client
+        self.DL = YoutubeDL(option)
+    
+    @commands.Cog.listener()
+    async def on_ready(self):
+        print("Music Cog is Ready")
+
+    async def play_music(self, ctx, url):
+    if ctx.voice_client is None: 
+        if ctx.author.voice:
+            await ctx.author.voice.channel.connect()
+        else:
+            embed = discord.Embed(title = '오류 발생', description = "음성 채널에 들어간 후 명령어를 사용 해 주세요!", color = discord.Color.red())
+            await ctx.send(embed=embed)
+            raise commands.CommandError("Author not connected to a voice channel.")
+    elif ctx.voice_client.is_playing():
+        ctx.voice_client.stop()
+
+    @commands.command(name ="음악재생")
+    async def play_music(self, ctx, url):
+        if ctx.voice_client is None: 
+            if ctx.author.voice:
+                await ctx.author.voice.channel.connect()
+            else:
+                embed = discord.Embed(title = '오류 발생', description = "음성 채널에 들어간 후 명령어를 사용 해 주세요!", color = discord.Color.red())
+                await ctx.send(embed=embed)
+                raise commands.CommandError("Author not connected to a voice channel.")
+        elif ctx.voice_client.is_playing():
+            ctx.voice_client.stop()
+        await ctx.send(url)
+        embed = discord.Embed(title = '음악 재생', description = '음악 재생을 준비하고있어요. 잠시만 기다려 주세요!' , color = discord.Color.red())
+        await ctx.send(embed=embed)
+
+        data = self.DL.extract_info(url, download = False)
+        link = data['url']
+        title = data['title']
+
+        ffmpeg_options = {
+            'options': '-vn',
+            "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"
+        }
+        player = discord.FFmpegPCMAudio(link, **ffmpeg_options, executable = FFMPEG_PATH)
+        ctx.voice_client.play(player)
+        
+        embed = discord.Embed(title = '음악 재생', description = f'{title} 재생을 시작힐게요!' , color = discord.Color.blue())
+        await ctx.send(embed=embed)
+
+def setup(client):
+    client.add_cog(Music(client))
