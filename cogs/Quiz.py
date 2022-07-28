@@ -30,7 +30,7 @@ class Quiz(commands.Cog):
             await self.client.wait_for("message", timeout = 10.0, check = checkAnswer)
             await ctx.send("정답이에요!")
         except asyncio.TimeoutError:
-            await ctx.send("땡! 시간초과에요!")
+            await ctx.send(f'땡! 시간초과에요! [정답 : {answer}]')
 
 def setup(client):
     client.add_cog(Quiz(client))
