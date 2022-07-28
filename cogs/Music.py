@@ -13,9 +13,6 @@ class Music(commands.Cog):
         self.DL = YoutubeDL(option)
         self.TestNumber = 1
 
-    def EndSong(ctx):
-        print("Music Cog is Ready")
-
     @commands.Cog.listener()
     async def on_ready(self):
         print("Music Cog is Ready")
