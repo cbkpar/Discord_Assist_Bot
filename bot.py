@@ -3,7 +3,7 @@ from youtube_dl import YoutubeDL
 from discord.ext import commands
 import os
 
-client = commands.Bot(command_prefix = '!')
+client = commands.Bot(command_prefix = '!', help_command=None)
 
 for filename in os.listdir('./cogs'):
     if '.py' in filename:
