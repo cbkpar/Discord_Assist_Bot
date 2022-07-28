@@ -25,6 +25,9 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    if message.author == client.user:
+        return
+
     if message.content.startswith("!ping4"):
         await message.channel.send("pong1")
 
@@ -129,6 +132,7 @@ async def on_message(message):
         category = random.choice(categories)
         lunch = random.choice(food[category]) 
         await message.channel.send(f"오늘 점심은 {category}, 그 중에서 {lunch} 어떠세요?")
-
+    
+    await client.process_commands(message)
         
 client.run(os.environ['token'])
