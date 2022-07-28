@@ -58,5 +58,21 @@ class Music(commands.Cog):
             embed = discord.Embed(title = '', description = '음악 재생을 종료합니다.' , color = discord.Color.blue())
             await ctx.send(embed=embed)
 
+    @commands.command(name="정지")
+    async def pause_music(self, ctx):
+        voice = ctx.voice_client
+        if voice.is_playing():
+            await voice.pause()
+            embed = discord.Embed(title='', description='음악 재생을 일시정지합니다.', color=discord.Color.purple())
+            await ctx.send(embed=embed)
+
+    @commands.command(name="시작")
+    async def resume_music(self, ctx):
+        voice = ctx.voice_client
+        if voice.is_paused():
+            await voice.resume()
+            embed = discord.Embed(title='', description='멈춘 부분부터 음악을 재생합니다.', color=discord.Color.purple())
+            await ctx.send(embed=embed)
+
 def setup(client):
     client.add_cog(Music(client))
