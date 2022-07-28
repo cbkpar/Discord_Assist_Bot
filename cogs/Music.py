@@ -57,19 +57,19 @@ class Music(commands.Cog):
             embed = discord.Embed(title = '', description = '다음 재생 목록에 추가했어요.' , color = discord.Color.blue())
             await ctx.send(embed=embed)
         else:
-          playdata = self.playqueue.pop(0)
-          link = playdata['url']
-          title = playdata['title']
-          ffmpeg_options = {
-              'options': '-vn',
-              "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"
-          }
-          embed = discord.Embed(title = '음악 재생', description = '음악 재생을 준비하고있어요. 잠시만 기다려 주세요!' , color = discord.Color.red())
-          await ctx.send(embed=embed)
-          player = discord.FFmpegPCMAudio(link, **ffmpeg_options)
-          ctx.voice_client.play(player, after=lambda e: play_next(ctx))
-          embed = discord.Embed(title = '음악 재생', description = f'{title} 재생을 시작힐게요!' , color = discord.Color.blue())
-          await ctx.send(embed=embed)
+            playdata = self.playqueue.pop(0)
+            link = playdata['url']
+            title = playdata['title']
+            ffmpeg_options = {
+                'options': '-vn',
+                "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"
+            }
+            embed = discord.Embed(title = '음악 재생', description = '음악 재생을 준비하고있어요. 잠시만 기다려 주세요!' , color = discord.Color.red())
+            await ctx.send(embed=embed)
+            player = discord.FFmpegPCMAudio(link, **ffmpeg_options)
+            ctx.voice_client.play(player, after=lambda e: play_next(ctx))
+            embed = discord.Embed(title = '음악 재생', description = f'{title} 재생을 시작힐게요!' , color = discord.Color.blue())
+            await ctx.send(embed=embed)
 
     @commands.command(name ="음악종료")
     async def quit_music(self, ctx):
@@ -77,6 +77,7 @@ class Music(commands.Cog):
         if voice.is_connected():
             await voice.disconnect()
             embed = discord.Embed(title = '', description = '음악 재생을 종료합니다.' , color = discord.Color.blue())
+            playqueue.clear()
             await ctx.send(embed=embed)
 
     @commands.command(name="정지")
