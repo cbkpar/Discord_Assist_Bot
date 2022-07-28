@@ -25,7 +25,7 @@ class Quiz(commands.Cog):
         await ctx.send(problem)
 
         def checkAnswer(message):
-            if message.channel == ctx.channel and answer == message.content:
+            if message.channel == ctx.channel and answer.lower() == message.content.lower():
                 return True
             else:
                 return False
@@ -43,7 +43,7 @@ class Quiz(commands.Cog):
         await ctx.send(problem)
 
         def checkAnswer(message):
-            if message.channel == ctx.channel and answer == message.content:
+            if message.channel == ctx.channel and answer.lower() == message.content.lower():
                 return True
             else:
                 return False
