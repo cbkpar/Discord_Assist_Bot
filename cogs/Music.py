@@ -11,6 +11,7 @@ class Music(commands.Cog):
         }
         self.client = client
         self.DL = YoutubeDL(option)
+        self.TestNumber = 1
     
     @commands.Cog.listener()
     async def on_ready(self):
@@ -41,10 +42,13 @@ class Music(commands.Cog):
             'options': '-vn',
             "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"
         }
-        embed = discord.Embed(title = '음악 재생', description = f'{title} 재생을 시작힐게요!' , color = discord.Color.blue())
-        await ctx.send(embed=embed)
         player = discord.FFmpegPCMAudio(link, **ffmpeg_options)
         ctx.voice_client.play(player)
+        embed = discord.Embed(title = '음악 재생', description = f'{title} 재생을 시작힐게요!' , color = discord.Color.blue())
+        await ctx.send(embed=embed)
+        self.TestNumber += 1
+        await ctx.send(f'{self.TestNumber} 입니다')
+        
 
     @commands.command(name ="음악종료")
     async def quit_music(self, ctx):
