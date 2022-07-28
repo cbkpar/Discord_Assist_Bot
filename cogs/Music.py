@@ -53,8 +53,6 @@ class Music(commands.Cog):
                     asyncio.run_coroutine_threadsafe(ctx.send("No more songs in queue."))
 
         if ctx.voice_client.is_playing():
-            embed = discord.Embed(title = f'{data['title']}', description = '다음 재생 목록에 추가했어요.' , color = discord.Color.blue())
-            await ctx.send(embed=embed)
         else:
           playdata = self.playqueue.pop(0)
           link = playdata['url']
@@ -63,8 +61,6 @@ class Music(commands.Cog):
               'options': '-vn',
               "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"
           }
-          embed = discord.Embed(title = '음악 재생', description = '음악 재생을 준비하고있어요. 잠시만 기다려 주세요!' , color = discord.Color.red())
-          await ctx.send(embed=embed)
           player = discord.FFmpegPCMAudio(link, **ffmpeg_options)
           ctx.voice_client.play(player, after=lambda e: play_next(ctx))
           embed = discord.Embed(title = '음악 재생', description = f'{title} 재생을 시작힐게요!' , color = discord.Color.blue())
@@ -94,6 +90,15 @@ class Music(commands.Cog):
             embed = discord.Embed(title='', description='멈춘 부분부터 음악을 재생합니다.', color=discord.Color.purple())
             await ctx.send(embed=embed)
 
+    @commands.command(name="재생목록")
+    async def resume_music(self, ctx):
+      embed = discord.Embed(title='플레이리스트', description='재생목록입니다', color=discord.Color.purple())
+      for i in range(len(self.playqueue)):
+        playdata = self.playqueue[i]
+        link = playdata['url']
+        title = playdata['title']
+        embed.add_field(name=f'{i}.', value=f'{title}', inline=False)
+      await ctx.send(embed=embed)
 
 def setup(client):
     client.add_cog(Music(client))
