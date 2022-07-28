@@ -13,7 +13,7 @@ class Music(commands.Cog):
         self.DL = YoutubeDL(option)
         self.TestNumber = 1
     
-    def EndSong(ctx):
+    async def EndSong(ctx):
         await ctx.send(f'{self.TestNumber} 음악끝났다')
 
     @commands.Cog.listener()
