@@ -51,7 +51,7 @@ class Music(commands.Cog):
             'options': '-vn',
             "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"
         }
-        player = discord.FFmpegPCMAudio(link, **ffmpeg_options, executable = './database/ffmpeg.exe')
+        player = discord.FFmpegPCMAudio(link, **ffmpeg_options, executable = "ffmpeg.exe")
         ctx.voice_client.play(player)
         
         embed = discord.Embed(title = '음악 재생', description = f'{title} 재생을 시작힐게요!' , color = discord.Color.blue())
@@ -64,6 +64,6 @@ class Music(commands.Cog):
               await voice.disconnect()
               embed = discord.Embed(title = '', description = '음악 재생을 종료합니다.' , color = discord.Color.blue())
               await ctx.send(embed=embed)
-              
+
 def setup(client):
     client.add_cog(Music(client))
