@@ -44,7 +44,7 @@ class Music(commands.Cog):
             "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"
         }
         
-        def EndSong(self, ctx):
+        def EndSong(ctx):
           await ctx.send(f'{self.TestNumber} 음악끝났다')
 
         player = discord.FFmpegPCMAudio(link, **ffmpeg_options)
