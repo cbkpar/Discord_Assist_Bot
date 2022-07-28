@@ -99,18 +99,7 @@ class Music(commands.Cog):
     @commands.command(name="다음")
     async def next_music(self, ctx):
         if len(self.playqueue) >= 1:
-            playdata = self.playqueue.pop(0)
-            link = playdata['url']
-            title = playdata['title']
-            ffmpeg_options = {
-                'options': '-vn',
-                "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"
-            }
-            player = discord.FFmpegPCMAudio(link, **ffmpeg_options)
             await ctx.voice_client.stop()
-            ctx.voice_client.play(player, after=lambda e: play_next(ctx))
-            embed = discord.Embed(title = '음악 재생', description = f'{title} 재생을 시작힐게요!' , color = discord.Color.blue())
-            await ctx.send(embed=embed)
 
     @commands.command(name="재생목록")
     async def list_music(self, ctx):
