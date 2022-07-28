@@ -22,7 +22,7 @@ class Quiz(commands.Cog):
         await ctx.send(problem)
 
         def checkAnswer(message):
-            if message.channel == ctx.channel and answer in message.content:
+            if message.channel == ctx.channel and answer == message.content:
                 return True
             else:
                 return False
