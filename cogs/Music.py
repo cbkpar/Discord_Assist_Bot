@@ -14,7 +14,7 @@ class Music(commands.Cog):
         self.TestNumber = 1
 
     def EndSong(ctx):
-        await ctx.send(f'{self.TestNumber} 음악끝났다')
+        print("Music Cog is Ready")
 
     @commands.Cog.listener()
     async def on_ready(self):
