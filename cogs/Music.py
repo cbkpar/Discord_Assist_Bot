@@ -27,7 +27,7 @@ class Music(commands.Cog):
         ctx.voice_client.stop()
 
     @commands.command(name ="음악재생")
-    async def play_music(self, ctx, url):
+    async def play_music(self, ctx, *keywords):
         if ctx.voice_client is None: 
             if ctx.author.voice:
                 await ctx.author.voice.channel.connect()
@@ -37,6 +37,8 @@ class Music(commands.Cog):
                 raise commands.CommandError("Author not connected to a voice channel.")
         elif ctx.voice_client.is_playing():
             ctx.voice_client.stop()
+        keyword = ' '.join(keywords)
+        url = getUrl(keyword)
         await ctx.send(url)
         embed = discord.Embed(title = '음악 재생', description = '음악 재생을 준비하고있어요. 잠시만 기다려 주세요!' , color = discord.Color.red())
         await ctx.send(embed=embed)
@@ -49,11 +51,19 @@ class Music(commands.Cog):
             'options': '-vn',
             "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"
         }
-        player = discord.FFmpegPCMAudio(link, **ffmpeg_options, executable = FFMPEG_PATH)
+        player = discord.FFmpegPCMAudio(link, **ffmpeg_options, executable = './database/ffmpeg.exe')
         ctx.voice_client.play(player)
         
         embed = discord.Embed(title = '음악 재생', description = f'{title} 재생을 시작힐게요!' , color = discord.Color.blue())
         await ctx.send(embed=embed)
 
+      @commands.command(name ="음악종료")
+      async def quit_music(self, ctx):
+          voice = ctx.voice_client
+          if voice.is_connected():
+              await voice.disconnect()
+              embed = discord.Embed(title = '', description = '음악 재생을 종료합니다.' , color = discord.Color.blue())
+              await ctx.send(embed=embed)
+              
 def setup(client):
     client.add_cog(Music(client))
