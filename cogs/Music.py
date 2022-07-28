@@ -12,7 +12,9 @@ class Music(commands.Cog):
         self.client = client
         self.DL = YoutubeDL(option)
         self.TestNumber = 1
-    
+
+    def EndSong(ctx):
+        await ctx.send(f'{self.TestNumber} 음악끝났다')
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -44,8 +46,7 @@ class Music(commands.Cog):
             "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"
         }
         
-        def EndSong(ctx):
-          await ctx.send(f'{self.TestNumber} 음악끝났다')
+
 
         player = discord.FFmpegPCMAudio(link, **ffmpeg_options)
         ctx.voice_client.play(player, after=lambda e: EndSong(ctx))
