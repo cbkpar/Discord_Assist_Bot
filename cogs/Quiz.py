@@ -7,7 +7,7 @@ import random
 class Quiz(commands.Cog):
     def __init__(self, client):
         self.client = client
-        with open("./data/lunch.json", 'r', encoding='utf-8') as f:
+        with open("./data/quiz.json", 'r', encoding='utf-8') as f:
             self.quizDict = json.load(f)
 
     @commands.Cog.listener()
