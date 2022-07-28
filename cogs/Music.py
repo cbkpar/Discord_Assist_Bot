@@ -97,7 +97,7 @@ class Music(commands.Cog):
             await ctx.send(embed=embed)
     
     @commands.command(name="다음")
-    async def resume_music(self, ctx):
+    async def next_music(self, ctx):
         if len(self.playqueue) >= 1:
             playdata = self.playqueue.pop(0)
             link = playdata['url']
@@ -112,7 +112,7 @@ class Music(commands.Cog):
             asyncio.run_coroutine_threadsafe(ctx.send(embed=embed))
 
     @commands.command(name="재생목록")
-    async def resume_music(self, ctx):
+    async def list_music(self, ctx):
       embed = discord.Embed(title='플레이리스트', description='재생목록입니다', color=discord.Color.purple())
       for i in range(len(self.playqueue)):
           playdata = self.playqueue[i]
