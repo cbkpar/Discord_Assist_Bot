@@ -49,7 +49,7 @@ class Music(commands.Cog):
 
 
         player = discord.FFmpegPCMAudio(link, **ffmpeg_options)
-        ctx.voice_client.play(player, after=lambda e: EndSong(ctx))
+        ctx.voice_client.play(player)
         embed = discord.Embed(title = '음악 재생', description = f'{title} 재생을 시작힐게요!' , color = discord.Color.blue())
         await ctx.send(embed=embed)
         self.TestNumber += 1
