@@ -44,11 +44,15 @@ async def on_message(message):
         output += "!카타나제로\n"
         output += "!요시\n"
         output += "!투표 제목/항목1/항목2/항목3\n"
+        output += "!점심추천\n"
         output += "```"
         await message.channel.send(output)
 
     if message.content.startswith("!시놀로지"):
         await message.channel.send("시놀로지 : <http://jusin.synology.me:5000/>")
+
+    if message.content.startswith("!단계"):
+        await message.channel.send("단계별 문제 : <https://www.acmicpc.net/step>")
 
     if message.content.startswith("!문제뽑기"):
         info = message.content[6:]
