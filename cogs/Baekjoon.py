@@ -28,7 +28,7 @@ class Baekjoon(commands.Cog):
                     output += tags[i].text + " : "
                 if i%6 == 2:
                     output += tags[i].text + "\n"
-                if i%120 == 0:
+                if i%120 == 119:
                     output += "```"
                     await ctx.send(f'{output}')
                     output = "```"
