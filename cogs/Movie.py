@@ -14,13 +14,11 @@ class Movie(commands.Cog):
 
     @commands.command(name ="영화")
     async def _movie(self, ctx):
-        await ctx.send('movie test!')
         try:
             response = requests.get("http://www.cgv.co.kr/movies/")
             response.encoding = 'utf-8'
             html = response.text
             soup = BeautifulSoup(html, 'html.parser')
-
             tags = soup.findAll('div', attrs={'class': 'box-contents'})
             output = "```"
             for i in range(0, len(tags)) :
@@ -28,6 +26,7 @@ class Movie(commands.Cog):
                 output += tags[i].strong.text
                 output += " " + tags[i].find("strong","percent").span.text
                 output += " " + tags[i].find("span","txt-info").strong.text.split('\n')[1].replace(" ","") + "\n"
+            output += "출처 : <http://www.cgv.co.kr/movies/>\n"
             output += "```"
             await ctx.send(f'{output}')
         except:

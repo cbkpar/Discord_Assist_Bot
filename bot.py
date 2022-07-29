@@ -42,6 +42,7 @@ async def on_message(message):
         output += "!투표 제목/항목1/항목2/항목3\n"
         output += "!음악재생 제목 !음악종료 !정지 !시작 !다음 !재생목록\n"
         output += "!점심추천\n"
+        output += "!영화\n"
         output += "!퀴즈 !넌센스\n"
         output += "```"
         await message.channel.send(output)
