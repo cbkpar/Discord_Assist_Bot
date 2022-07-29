@@ -22,11 +22,13 @@ class Movie(commands.Cog):
             soup = BeautifulSoup(html, 'html.parser')
 
             tags = soup.findAll('div', attrs={'class': 'box-contents'})
-            output = ""
-            for tag in tags :
-                output += tag.strong.text
-                output += " " + tag.find("strong","percent").span.text
-                output += " " + tag.find("span","txt-info").strong.text.replace("개봉","").replace("\n","").replace(" ","") + "\n"
+            output = "```"
+            for i in range(0, len(tags)) :
+                output += str(i+1)+". "
+                output += tags[i].strong.text
+                output += " " + tags[i].find("strong","percent").span.text
+                output += " " + tags[i].find("span","txt-info").strong.text.split('\n')[1].replace(" ","") + "\n"
+            output += "```"
             await ctx.send(f'{output}')
         except:
             await ctx.send(f'{today.month}월 {today.day}일 {today.hour}시 {today.minute}분 CGV 오류 발생')
