@@ -50,9 +50,6 @@ async def on_message(message):
     if message.content.startswith("!시놀로지"):
         await message.channel.send("시놀로지 : <http://jusin.synology.me:5000/>")
 
-    if message.content.startswith("!단계"):
-        await message.channel.send("단계별 문제 : <https://www.acmicpc.net/step>")
-
     if message.content.startswith("!문제뽑기"):
         info = message.content[6:]
         infosplit = info.split("/")
