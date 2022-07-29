@@ -16,7 +16,7 @@ class Baekjoon(commands.Cog):
         soup = BeautifulSoup(html, 'html.parser')
         for a in soup.table.find_all('a', href=True):
             self.problemsize += 1
-            self.problemlist[problemsize].append(a['href'].split('/')[2])
+            self.problemlist.append(a['href'].split('/')[2])
 
     @commands.Cog.listener()
     async def on_ready(self):
