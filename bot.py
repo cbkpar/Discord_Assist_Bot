@@ -34,7 +34,7 @@ async def on_message(message):
     if message.content.startswith("!help"):
         output = "```명령어 리스트\n"
         output += "!시놀로지\n"
-        output += "!단계\n"
+        output += "!단계 (숫자)\n"
         output += "!문제뽑기 이름 이름/번호 번호\n"
         output += "!주사위 숫자\n"
         output += "!타이머 숫자\n"
