@@ -49,7 +49,6 @@ class Baekjoon(commands.Cog):
             except:
                 await ctx.send(f'{today.month}월 {today.day}일 {today.hour}시 {today.minute}분 백준 Step 오류 발생')
         else:
-            await ctx.send(f'{self.problemsize}')
             number = int(args)
             if number >= 1 and number <= self.problemsize:
                 try:
@@ -62,7 +61,7 @@ class Baekjoon(commands.Cog):
                     problem = ""
                     for i in range(0,len(tags)) :
                         if i%8 == 0:
-                            output += tags[i].text + "."
+                            output += tags[i].text + ". "
                         if i%8 == 1:
                             output += tags[i].text + " : "
                             problem += tags[i].text + " "
