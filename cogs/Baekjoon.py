@@ -7,6 +7,16 @@ from bs4 import BeautifulSoup
 class Baekjoon(commands.Cog):
     def __init__(self, client):
         self.client = client
+        self.problemlist = []
+        self.problemlist.append(0)
+        self.problemsize = 0
+        response = requests.get("https://www.acmicpc.net/step")
+        response.encoding = 'utf-8'
+        html = response.text
+        soup = BeautifulSoup(html, 'html.parser')
+        for a in soup.table.find_all('a', href=True):
+            self.problemsize += 1
+            self.problemlist[problemsize].append(a['href'].split('/')[2])
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -41,7 +51,7 @@ class Baekjoon(commands.Cog):
         else:
             if args >= 1 and args <= self.problemsize:
                 try:
-                    response = requests.get("https://www.acmicpc.net/step/" + args)
+                    response = requests.get("https://www.acmicpc.net/step/" + self.problemlist[args])
                     response.encoding = 'utf-8'
                     html = response.text
                     soup = BeautifulSoup(html, 'html.parser')
