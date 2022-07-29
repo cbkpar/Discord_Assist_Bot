@@ -49,6 +49,7 @@ class Baekjoon(commands.Cog):
             except:
                 await ctx.send(f'{today.month}월 {today.day}일 {today.hour}시 {today.minute}분 백준 Step 오류 발생')
         else:
+            await ctx.send(f'{self.problemsize}')
             number = int(args)
             if number >= 1 and number <= self.problemsize:
                 try:
