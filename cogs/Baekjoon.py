@@ -16,7 +16,7 @@ class Baekjoon(commands.Cog):
         soup = BeautifulSoup(html, 'html.parser')
         for a in soup.table.find_all('a', href=True):
             self.problemsize += 1
-            self.problemlist.append(a['href'].split('/')[2])
+            self.problemlist.append(int(a['href'].split('/')[2]))
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -49,9 +49,10 @@ class Baekjoon(commands.Cog):
             except:
                 await ctx.send(f'{today.month}월 {today.day}일 {today.hour}시 {today.minute}분 백준 Step 오류 발생')
         else:
-            if args >= 1 and args <= self.problemsize:
+            number = int(args)
+            if number >= 1 and number <= self.problemsize:
                 try:
-                    response = requests.get("https://www.acmicpc.net/step/" + self.problemlist[args])
+                    response = requests.get("https://www.acmicpc.net/step/" + self.problemlist[number])
                     response.encoding = 'utf-8'
                     html = response.text
                     soup = BeautifulSoup(html, 'html.parser')
