@@ -34,6 +34,7 @@ async def on_message(message):
     if message.content.startswith("!help"):
         output = "```명령어 리스트\n"
         output += "!시놀로지\n"
+        output += "!단계\n"
         output += "!문제뽑기 이름 이름/번호 번호\n"
         output += "!주사위 숫자\n"
         output += "!타이머 숫자\n"
@@ -41,6 +42,7 @@ async def on_message(message):
         output += "!투표 제목/항목1/항목2/항목3\n"
         output += "!음악재생 제목 !음악종료 !정지 !시작 !다음 !재생목록\n"
         output += "!점심추천\n"
+        output += "!퀴즈 !넌센스\n"
         output += "```"
         await message.channel.send(output)
 
