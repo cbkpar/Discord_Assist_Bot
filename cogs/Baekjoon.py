@@ -52,9 +52,9 @@ class Baekjoon(commands.Cog):
             await ctx.send(f'{self.problemsize}')
             number = int(args)
             if number >= 1 and number <= self.problemsize:
-                await ctx.send(f'{self.problemsize}')
+                await ctx.send(f'{self.problemlist[number]}')
                 try:
-                    response = requests.get("https://www.acmicpc.net/step/" + self.problemlist[number])
+                    response = requests.get("https://www.acmicpc.net/step/" + str(self.problemlist[number]))
                     await ctx.send(f'{self.problemlist[number]}')
                     response.encoding = 'utf-8'
                     html = response.text
