@@ -20,7 +20,14 @@ class Movie(commands.Cog):
             response.encoding = 'utf-8'
             html = response.text
             soup = BeautifulSoup(html, 'html.parser')
-            await ctx.send(f'{soup}')
+
+            tags = soup.findAll('div', attrs={'class': 'box-contents'})
+            output = ""
+            for tag in tags :
+                output += tag.strong.text
+                output += " " + tag.find("strong","percent").span.text
+                output += " " + tag.find("span","txt-info").strong.text.replace("개봉","").replace("\n","").replace(" ","") + "\n"
+            await ctx.send(f'{output}')
         except:
             await ctx.send(f'{today.month}월 {today.day}일 {today.hour}시 {today.minute}분 CGV 오류 발생')
 
