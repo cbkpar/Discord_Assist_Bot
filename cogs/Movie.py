@@ -23,10 +23,10 @@ class Movie(commands.Cog):
             output = "```"
             for i in range(0, len(tags)) :
                 output += str(i+1)+". "
-                output += tags[i].strong.text
-                output += " ❤️" + tags[i].find("strong","percent").span.text
-                output += " 📅" + tags[i].find("span","txt-info").strong.text.split('\n')[1].replace(" ","") + "\n"
-            output += "출처 : <http://www.cgv.co.kr/movies/>\n"
+                output += '{0:<20}'.format(tags[i].strong.text)
+                output += '{0:<10}'.format(" ❤️" + tags[i].find("strong","percent").span.text)
+                output += '{0:<10}'.format(" 📅" + tags[i].find("span","txt-info").strong.text.split('\n')[1].replace(" ","")) + "\n"
+            output += "출처 : http://www.cgv.co.kr/movies/\n"
             output += "```"
             await ctx.send(f'{output}')
         except:
