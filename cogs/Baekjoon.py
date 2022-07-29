@@ -52,13 +52,15 @@ class Baekjoon(commands.Cog):
             await ctx.send(f'{self.problemsize}')
             number = int(args)
             if number >= 1 and number <= self.problemsize:
+                await ctx.send(f'{self.problemsize}')
                 try:
                     response = requests.get("https://www.acmicpc.net/step/" + self.problemlist[number])
+                    await ctx.send(f'{self.problemlist[number]}')
                     response.encoding = 'utf-8'
                     html = response.text
                     soup = BeautifulSoup(html, 'html.parser')
                     tags = soup.table.select('td')
-                    output = ""
+                    output = "```"
                     problem = ""
                     for i in range(0,len(tags)) :
                         if i%8 == 0:
