@@ -46,12 +46,12 @@ class Music(commands.Cog):
                 player = discord.FFmpegPCMAudio(link, **ffmpeg_options)
                 ctx.voice_client.play(player, after=lambda e: play_next(ctx))
                 embed = discord.Embed(title = '음악 재생', description = f'{title} 재생을 시작힐게요!' , color = discord.Color.blue())
-                asyncio.run_coroutine_threadsafe(ctx.send(embed=embed), self.bot.loop)
+                asyncio.run_coroutine_threadsafe(ctx.send(embed=embed), ctx.voice_client.loop)
             else:
                 asyncio.sleep(90) #wait 1 minute and 30 seconds
-                if not ctx.voice_client .is_playing():
-                    asyncio.run_coroutine_threadsafe(ctx.voice_client.disconnect(ctx), self.bot.loop)
-                    asyncio.run_coroutine_threadsafe(ctx.send("No more songs in queue."), self.bot.loop)
+                if not ctx.voice_client.is_playing():
+                    asyncio.run_coroutine_threadsafe(ctx.voice_client.disconnect(), ctx.voice_client.loop)
+                    asyncio.run_coroutine_threadsafe(ctx.send("No more songs in queue."), self.bot.loopctx.voice_client.loop)
                     
         if ctx.voice_client.is_playing():
             embed = discord.Embed(title = '', description = '다음 재생 목록에 추가했어요.' , color = discord.Color.blue())
