@@ -4,4 +4,4 @@ youtube-dl
 PyNaCl
 ffmpeg
 requests
-BeautifulSoup
+beautifulsoup4
