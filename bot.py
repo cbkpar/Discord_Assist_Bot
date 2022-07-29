@@ -101,6 +101,9 @@ async def on_message(message):
     if message.content.startswith("!요시"):
         await message.channel.send("https://youtu.be/v_hWPGw070w")
 
+    if message.content.startswith("!피카츄"):
+        await message.channel.send("https://youtu.be/g5fyObLtjCg?t=160")
+
     if message.content.startswith("!투표"):
         vote = message.content[4:].split("/")
         output = "```투표 - " + vote[0] + "\n"
