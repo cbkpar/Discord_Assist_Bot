@@ -28,6 +28,10 @@ class Baekjoon(commands.Cog):
                     output += tags[i].text + " : "
                 if i%6 == 2:
                     output += tags[i].text + "\n"
+                if i%120 == 0:
+                    output += "```"
+                    await ctx.send(f'{output}')
+                    output = "```"
             output += "출처 : https://www.acmicpc.net/step/\n"
             output += "```"
             await ctx.send(f'{output}')
