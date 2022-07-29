@@ -20,7 +20,7 @@ class Movie(commands.Cog):
             response.encoding = 'utf-8'
             html = response.text
             soup = BeautifulSoup(html, 'html.parser')
-            await ctx.send(soup)
+            await ctx.send(f'{soup}')
         except:
             await ctx.send(f'{today.month}월 {today.day}일 {today.hour}시 {today.minute}분 CGV 오류 발생')
 
