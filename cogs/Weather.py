@@ -16,7 +16,7 @@ class Weather(commands.Cog):
     async def _weather(self, ctx, args = None):
         search_data = ""
         if args == None:
-            search_data = "남구로"
+            search_data = "구로동"
         else:
             search_data = str(args)
         
@@ -26,7 +26,7 @@ class Weather(commands.Cog):
             html = response.text
             soup = BeautifulSoup(html, 'html.parser')
             output = "```"
-            output += search_data+" 날씨 검색결과 입니다"
+            output += search_data+" 날씨 검색결과 입니다\n"
             tags = soup.findAll('div', attrs={'class': 'temperature_info'})
             output += tags[0].text + "\n"
 
@@ -58,8 +58,8 @@ class Weather(commands.Cog):
                 
             for i in range(0,len(data_Time)):
                 output += data_Time[i] + " - "
-                output += data_Temp[i] + " "
-                output += data_Weather[i] + "("+data_RainRatio[i]+") "
+                output += '{0:<5}'.format(data_Temp[i]) + " "
+                output += '{0:<6}'.format(data_Weather[i]) + "("+'{0:<6}'.format(data_RainRatio[i])+") "
                 output += " 강수량 : " + data_RainAmount[i] + " \n"
                 if i == 19:
                     break
