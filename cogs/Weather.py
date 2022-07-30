@@ -58,8 +58,8 @@ class Weather(commands.Cog):
                 
             for i in range(0,len(data_Time)):
                 output += data_Time[i] + " - "
-                output += '{0:<5}'.format(data_Temp[i]) + " "
-                output += '{0:<6}'.format(data_Weather[i]) + "("+'{0:<6}'.format(data_RainRatio[i])+") "
+                output += data_Temp[i] + " "
+                output += data_Weather[i] + "("+data_RainRatio[i]+") "
                 output += " 강수량 : " + data_RainAmount[i] + " \n"
                 if i == 19:
                     break
