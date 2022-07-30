@@ -44,6 +44,7 @@ async def on_message(message):
         output += "!점심추천\n"
         output += "!영화\n"
         output += "!퀴즈 !넌센스\n"
+        output += "!날씨 (지역)"
         output += "```"
         await message.channel.send(output)
 
