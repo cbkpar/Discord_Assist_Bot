@@ -13,12 +13,10 @@ class LeagueofLegend(commands.Cog):
         print("LeagueofLegend Cog is Ready")
 
     @commands.command(name ="롤")
-    async def _lolsearch(self, ctx, args = None):
-        search_data = ""
-        if args == None:
+    async def _lolsearch(self, ctx, *keywords):
+        search_data = ' '.join(keywords)
+        if search_data == "":
             search_data = "도둥이의검"
-        else:
-            search_data = str(args)
         
         try:
             response = requests.get("https://op.gg/summoner/userName="+search_data, headers={'User-Agent': 'Mozilla/5.0'})
