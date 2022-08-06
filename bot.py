@@ -45,6 +45,7 @@ async def on_message(message):
         output += "!영화\n"
         output += "!퀴즈 !넌센스\n"
         output += "!날씨 (지역)"
+        output += "!롤 (닉네임)"
         output += "```"
         await message.channel.send(output)
 
