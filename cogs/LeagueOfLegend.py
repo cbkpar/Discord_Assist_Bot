@@ -16,6 +16,7 @@ class LeagueofLegend(commands.Cog):
     async def _lolsearch(self, ctx, *keywords):
         search_data = ' '.join(keywords)
         if search_data == "":
+            await ctx.send(f'<https://www.op.gg/multisearch/kr?summoners=냄세제로,말랑코기엉덩이,갤럭시s4,팀운이너무없자나,도둥이의검,찰진고솜도치ANG,군대5급면제,무호흡노딜기,승표는메갈>')
             search_data = "도둥이의검"
         
         try:
